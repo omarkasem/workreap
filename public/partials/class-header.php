@@ -114,12 +114,19 @@ if (!class_exists('WorkreapHeader')) {
 		    ?>
 		    <div class="<?php echo esc_attr($class); ?>">
                 <div class="wr-dashboard-sidebar-inner">
+                    <?php 
+                    // Get current page slug
+                    $current_page = (get_post( get_the_ID() )->post_name) ? get_post( get_the_ID() )->post_name : '';
+                    // Check if current page is not one of the excluded pages
+                    if ( !in_array( $current_page, array( 'app-dashboard', 'app-wallet','app-login', 'calendar' ) ) ) { 
+                    ?>
                     <div class="wr-dashboard-sidebar-header">
                         <button type="button" class="wr-dashboard-sidebar-toggle-btn">
 		                    <?php Workreap_Profile_Menu::workreap_get_avatar(); ?>
                             <i class="wr-icon-layout" aria-hidden="true"></i>
                         </button>
                     </div>
+                    <?php } ?>
                     <div class="wr-dashboard-sidebar-user-wrapper">
                         <div class="wr-dashboard-sidebar-user-info">
                             <figure class="wr-dashboard-sidebar-user-avatar">

@@ -162,6 +162,14 @@ $current_page_link  = !empty($current_page_link) ? $current_page_link : '';
                                         }
                                     }
 
+                                    if(function_exists('wmc_revert_price')){
+                                        $get_subtotal =  wmc_revert_price($order->get_subtotal(),$order->get_currency());
+                                    } else {
+                                        $get_subtotal   = $order->get_subtotal(); 
+                                    }
+
+
+
                                     $order_total        = !empty($order_total) ? $order_total : 0;
                                     $invoice_url        = Workreap_Profile_Menu::workreap_profile_menu_link('invoices', $user_identity, true, 'detail', intval($order->get_id()));
                                     $invoice_url        = apply_filters( 'workreap_filter_invoice_url', $invoice_url, $order->get_id() );
@@ -171,7 +179,7 @@ $current_page_link  = !empty($current_page_link) ? $current_page_link : '';
                                         <td data-label="<?php esc_attr_e('Name','workreap') ?>"><a href="javascript:void(0);"><?php echo esc_html($payemnt_type_text); ?></a></td>
                                         <td data-label="<?php esc_attr_e('Invoice date','workreap') ?>"><?php echo  date_i18n($date_format,strtotime($order->get_date_created())); ?></td>
                                         <td data-label="<?php esc_attr_e('Amount','workreap') ?>">
-                                            <span><?php workreap_price_format($order_total); ?></span>
+                                            <span><?php workreap_price_format($get_subtotal); ?></span>
                                         </td>
                                         <td data-label="<?php esc_attr_e('Action','workreap');?>">
                                             <ul class="wr-tabicon wr-invoicecon">

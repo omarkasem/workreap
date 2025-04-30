@@ -3583,7 +3583,7 @@ function init_image_uploader_v2(current_uploader, current_type,extensions_option
 					if (response.type === 'success') {
 						StickyAlert(response.message, response.message_desc, {classList: 'success', autoclose: scripts_vars.alertbox_autoclose || 5000});
 						window.setTimeout(function() {
-							window.location.reload();
+							window.location.href = scripts_vars.ajaxurl.replace('admin-ajax.php', '') + 'signin';
 						}, scripts_vars.alertbox_autoclose / 2 || 2500);
 					} else {
 						StickyAlert(response.message, response.message_desc, {classList: 'danger', autoclose: scripts_vars.alertbox_autoclose || 5000});

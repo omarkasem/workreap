@@ -175,7 +175,36 @@ $billing_address    = !empty($invoice_billing_to) && !empty($workreap_settings['
                             <?php if (!empty($from_billing_address)){ ?>
                                 <div class="wr-fromreceiver">
                                     <h5><?php esc_html_e('From:', 'workreap'); ?></h5>
-                                    <span><?php echo do_shortcode(nl2br($from_billing_address)); ?></span>
+                                    <!-- <span><?php echo do_shortcode(nl2br($from_billing_address)); ?></span> -->
+                                    <span>
+                                    <?php 
+                                    $store_address     = get_option( 'woocommerce_store_address' );
+                                    $store_address_2   = get_option( 'woocommerce_store_address_2' );
+                                    $store_city        = get_option( 'woocommerce_store_city' );
+                                    $store_postcode    = get_option( 'woocommerce_store_postcode' );
+                                    
+                                    // Format address in the requested format
+                                    $formatted_address = '';
+                                    
+                                    if ( !empty( $store_address ) ) {
+                                        $formatted_address .= $store_address . '<br>';
+                                    }
+                                    
+                                    if ( !empty( $store_address_2 ) ) {
+                                        $formatted_address .= $store_address_2 . '<br>';
+                                    }
+                                    
+                                    if ( !empty( $store_city ) ) {
+                                        $formatted_address .= $store_city . '<br>';
+                                    }
+                                    
+                                    if ( !empty( $store_postcode ) ) {
+                                        $formatted_address .= $store_postcode . '<br>';
+                                    }
+                                    
+                                    echo $formatted_address;
+                                    ?>
+                                    </span>
                                 </div>
                             <?php } ?>
                             
@@ -183,6 +212,7 @@ $billing_address    = !empty($invoice_billing_to) && !empty($workreap_settings['
                                 <div class="wr-fromreceiver">
                                     <h5><?php esc_html_e('To:', 'workreap'); ?></h5>
                                     <span><?php echo do_shortcode(nl2br($billing_address)); ?></span>
+  
                                 </div>
                             <?php } ?>
                         </div>
@@ -279,6 +309,11 @@ $billing_address    = !empty($invoice_billing_to) && !empty($workreap_settings['
                             </tbody>
                         </table>
                         <div class="wr-subtotal">
+
+                        <?php 
+                            $vat = ($get_subtotal + ($processing_fee ?? 0)) * 0.2;
+                        ?>
+
                             <ul class="wr-subtotalbill">
                                 <li><?php esc_html_e('Subtotal','workreap'); ?> : <h6><?php workreap_price_format($get_subtotal); ?></h6></li>
                                 <?php if(!empty($total_tax)){?>
@@ -289,7 +324,8 @@ $billing_address    = !empty($invoice_billing_to) && !empty($workreap_settings['
                                 <?php } ?>       
                                 <?php if( !empty($wallet_amount)){?>
                                     <li><?php esc_html_e('Wallet amount used','workreap'); ?> : <h6><?php workreap_price_format($wallet_amount); ?></h6></li>
-                                <?php } ?>                            
+                                <?php } ?>                 
+                                <li><?php esc_html_e('VAT (20%)', 'workreap'); ?> : <h6><?php workreap_price_format($vat); ?></h6> </li> 
                             </ul>
                             <div class="wr-sumtotal"><?php esc_html_e('Total','workreap'); ?> : <h6><?php workreap_price_format($get_total); ?></h6></div>
                         </div>

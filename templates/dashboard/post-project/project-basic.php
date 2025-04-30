@@ -186,7 +186,10 @@ $work_start_date = !empty($work_start_date) ? $work_start_date : date('Y-m-d');
                                 </div>
                             </div>
                             <div class="form-group form-group-half <?php echo esc_attr($fixed_class);?>">
-                                <label class="wr-label"><?php esc_html_e('Add your fixed budget','workreap');?></label>
+                                <label class="wr-label">
+                                    <?php esc_html_e('Add your fixed budget','workreap');?>
+                                </label>
+                                <small style="font-size: 11px;margin-top: -15px;" class="text-muted"><?php esc_html_e('Excluding VAT (20%)','workreap');?></small>
                                 <div class="wr-placeholderholder">
                                     <input type="number" name="max_price" value="<?php echo esc_attr($max_price);?>" class="form-control wr-themeinput" placeholder="<?php esc_attr_e('Enter your fixed price','workreap');?>">
                                 </div>
