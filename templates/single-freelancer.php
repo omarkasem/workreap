@@ -32,7 +32,7 @@ while (have_posts()) : the_post();
                         </div>
                     </aside>
                     <?php workreap_get_template( 'single-freelancer/profile-portfolio.php',$workreap_args);?>
-                    <?php workreap_get_template( 'single-freelancer/profile-education-v1.php',$workreap_args);?>
+                    <?php //workreap_get_template( 'single-freelancer/profile-education-v1.php',$workreap_args);?>
                     <?php workreap_get_template( 'single-freelancer/profile-experience-v1.php',$workreap_args);?>
                 </div>
                 <?php if( !empty($app_task_base) ){?>

@@ -55,7 +55,7 @@ $identity_verification	= !empty($workreap_settings['identity_verification']) ? $
 				
 				if( !empty($user_type) && $user_type == 'freelancers' ){
 					workreap_get_template_part('dashboard/dashboard', 'profile-settings');
-					workreap_get_template_part('dashboard/dashboard', 'education');
+					// workreap_get_template_part('dashboard/dashboard', 'education');
 					workreap_get_template_part('dashboard/dashboard', 'experience');
 					
 				} else {

@@ -91,6 +91,13 @@ $selected_freelancers   = !empty($selected_freelancers) ? intval($selected_freel
                                     ?>
                                 </div>
                             </div>
+							
+                            <div class="form-group">
+                                <label class="wr-label"><?php esc_html_e('Qualifications & Certifications','workreap');?></label>
+                                <?php do_action('uf_qualifications_certifications_field', $product->get_id(),'No qualifications required'); ?>
+                            </div>
+							
+							
                             <?php if(!empty($remove_languages) && $remove_languages === 'no'){?>
                                 <div class="form-group">
                                     <label class="wr-label"><?php esc_html_e('Languages','workreap');?></label>

@@ -64,7 +64,7 @@ $identity_verified		= !empty($identity_verified) ? $identity_verified : 0;
 							</div>
 							<div class="form-group form-group_vertical">
 								<label class="form-group-title"><?php esc_html_e('Add address:', 'workreap'); ?></label>
-								<textarea class="form-control" name="address" placeholder="<?php esc_attr_e('Add address', 'workreap'); ?>"></textarea>
+								<input type="text" class="form-control identity-address" autocomplete="off" name="address" placeholder="<?php esc_attr_e('Add address', 'workreap'); ?>">
 							</div>
 							<div class="form-group">
                                 <label class="form-group-title"><?php esc_html_e('Upload identity document:', 'workreap'); ?></label>
