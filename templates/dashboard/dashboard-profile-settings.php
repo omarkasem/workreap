@@ -107,7 +107,7 @@ $upload_file_size	= !empty($workreap_settings['upload_file_size']) ? $workreap_s
                 </div>
             </div>
         </div>
-		<form class="wr-themeform wr-profileform" id="wr_save_settings">
+		<form class="wr-themeform wr-profileform" id="wr_save_settings" enctype="multipart/form-data">
 			<fieldset>
 				<div class="wr-profileform__holder">
 					<div class="wr-profileform__detail wr-billinginfo">

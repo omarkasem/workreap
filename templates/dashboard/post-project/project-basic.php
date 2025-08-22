@@ -26,7 +26,8 @@ $project_meta       = !empty($project_meta) ? $project_meta : array();
 
 $selected_job_type  = !empty($project_meta['project_type']) ? $project_meta['project_type'] : "fixed";
 $product_cat        = !empty($product) ? get_the_terms( $product->get_id(), 'product_cat' ) : array();
-$selected_category  = !empty($product_cat[0]->term_id) ? intval($product_cat[0]->term_id) : 0;
+// $selected_category  = !empty($product_cat[0]->term_id) ? intval($product_cat[0]->term_id) : 0;
+$selected_categories = !empty($product_cat) ? array_map(function($category) { return $category->term_id; }, $product_cat) : array();
 $downloadable_files = get_post_meta($post_id, '_downloadable_files', true);
 $videourl           = !empty($project_meta['video_url']) ? $project_meta['video_url'] : "";
 
@@ -222,26 +223,38 @@ $work_start_date = !empty($work_start_date) ? $work_start_date : date('Y-m-d');
                                 <label class="wr-label"><?php esc_html_e('Project category','workreap');?></label>
                                 <div class="wr-select wr-project-select">
                                     <?php
+                                        // $category_args = array(
+                                        //     'show_option_none'  => esc_html__('Choose category', 'workreap'),
+                                        //     'option_none_value' => '',
+                                        //     'show_count'    => false,
+                                        //     'hide_empty'    => false,
+                                        //     'name'          => 'categories',
+                                        //     'class'         => $cat_class,
+                                        //     'taxonomy'      => 'product_cat',
+                                        //     'value_field'   => 'term_id',
+                                        //     'orderby'       => 'name',
+                                        //     'hide_if_empty' => false,
+                                        //     'echo'          => true,
+                                        //     'required'      => false,
+                                        //     'parent'        => 0,
+                                        //     'selected'      => $selected_category,
+                                        // );
+                                        // if( !empty($hide_product_cat) ){
+                                        //     $category_args['exclude']    = $hide_product_cat;
+                                        // }
+                                        // do_action('workreap_taxonomy_dropdown', $category_args);
+
                                         $category_args = array(
-                                            'show_option_none'  => esc_html__('Choose category', 'workreap'),
-                                            'option_none_value' => '',
-                                            'show_count'    => false,
-                                            'hide_empty'    => false,
-                                            'name'          => 'categories',
-                                            'class'         => $cat_class,
+                                            'class'         => 'wr-select2-cat wr-select2-categories',
                                             'taxonomy'      => 'product_cat',
                                             'value_field'   => 'term_id',
                                             'orderby'       => 'name',
-                                            'hide_if_empty' => false,
-                                            'echo'          => true,
-                                            'required'      => false,
+                                            'name'          => 'categories[]',
                                             'parent'        => 0,
-                                            'selected'      => $selected_category,
+                                            'exclude'       => 15,
+                                            'selected'      => $selected_categories,
                                         );
-                                        if( !empty($hide_product_cat) ){
-                                            $category_args['exclude']    = $hide_product_cat;
-                                        }
-                                        do_action('workreap_taxonomy_dropdown', $category_args);
+                                        do_action('workreap_custom_taxonomy_dropdown', $category_args);
                                     ?>
                                 </div>
                             </div>

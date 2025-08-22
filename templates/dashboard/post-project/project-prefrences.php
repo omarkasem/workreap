@@ -231,3 +231,4 @@ jQuery(document).ready(function($){
 
     });";
     wp_add_inline_script('workreap', $scripts, 'after');
+                                            

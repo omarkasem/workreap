@@ -3816,6 +3816,9 @@ if( !function_exists(  'workreap_view_identity_detail' ) ) {
 			unset( $verification['info'] );
 		}
 
+        $linked_profile = get_user_meta($user_id, '_linked_profile', true);
+        $insurance_certificate = get_post_meta($linked_profile, 'insurance_certificate', true);
+
 		ob_start();
 		?>
 		<div class="cus-modal-bodywrap">
@@ -3837,11 +3840,21 @@ if( !function_exists(  'workreap_view_identity_detail' ) ) {
 						foreach($verification as $key => $item){
 						?>
 						<div class="cus-options-data cus-options-files">
+                            <label><span><strong>Uploaded ID</strong></span></label>
 							<div class="step-value">
 								<span><a target="_blank" href="<?php echo esc_attr( $item['url'] );?>"><?php echo esc_attr( $item['name'] );?></a></span>
 							</div>
 						</div>
 					<?php }}?>
+
+                    <?php if(!empty($insurance_certificate)){?>
+                        <div class="cus-options-data cus-options-files">
+                            <label><span><strong>Uploaded Insurance Certificate</strong></span></label>
+                            <div class="step-value">
+                                <span><a target="_blank" href="<?php echo esc_attr( $insurance_certificate );?>"><?php echo esc_attr( $insurance_certificate );?></a></span>
+                            </div>
+                        </div>
+                    <?php }?>
 				</div>
 			</div>
 		</div>
@@ -3976,6 +3989,35 @@ if( !function_exists('workreap_verification_tag_html')){
                 <i class="wr-icon-check-circle" <?php echo apply_filters('workreap_tooltip_attributes', 'verified_user');?>></i>
                 <?php
                 echo ob_get_clean();
+            }
+        }
+
+        if( !empty($post_id) ){
+            $linked_profile = get_post_meta($post_id, '_linked_profile', true);
+            if( !empty($linked_profile) ){
+                $is_insured = get_post_meta($linked_profile, 'insurance_certificate', true);
+                if( !empty($is_insured) ) {
+                    ob_start();
+                    ?>
+                        <svg class="insured-icon" data-class="wr-tooltip-data" id="wr-tooltip<?php echo rand(1, 1000000) ?>" data-tippy-interactive="true" data-tippy-placement="top-start" data-tippy-content="Insured Fitter" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 20 20" fill="none">
+                        <!-- Shield background -->
+                        <path d="M10.2774 2.08397C10.1094 1.97201 9.8906 1.97201 9.72265 2.08397C7.78446 3.3761 5.68833 4.18231 3.42929 4.50503C3.18296 4.54021 3 4.75118 3 5V9.5C3 13.3913 5.30699 16.2307 9.82051 17.9667C9.93605 18.0111 10.064 18.0111 10.1795 17.9667C14.693 16.2307 17 13.3913 17 9.5V5C17 4.75118 16.817 4.54021 16.5707 4.50503C14.3117 4.18231 12.2155 3.3761 10.2774 2.08397Z" 
+                                fill="#3B82F6"/>
+                        
+                        <!-- Checkmark -->
+                        <path d="M13.8536 7.85355L9.85355 11.8536C9.65829 12.0488 9.34171 12.0488 9.14645 11.8536L7.14645 9.85355C6.95118 9.65829 6.95118 9.34171 7.14645 9.14645C7.34171 8.95119 7.65829 8.95119 7.85355 9.14645L9.5 10.7929L13.1464 7.14645C13.3417 6.95118 13.6583 6.95118 13.8536 7.14645C14.0488 7.34171 14.0488 7.65829 13.8536 7.85355Z" 
+                                fill="white"/>
+                        </svg>
+
+                        <style>
+                            .wr-profile-title .insured-icon {
+                                margin-left: -5px;
+                                margin-top: 3px;
+                            }
+                        </style>
+                    <?php
+                    echo ob_get_clean();
+                }
             }
         }
     }

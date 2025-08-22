@@ -282,6 +282,7 @@ if (!class_exists('WorkreapProjectFunctions')) {
             $args       = array(
                 'taxonomy'      => !empty($term_arg['taxonomy']) ? $term_arg['taxonomy'] : '',
                 'orderby'       => !empty($term_arg['orderby']) ? $term_arg['orderby'] : 'name',
+                'exclude'       => !empty($term_arg['exclude']) ? $term_arg['exclude'] : '',
                 'hide_empty'    => false
             );
             $taxonomies     = get_terms($args);
@@ -936,7 +937,7 @@ if (!function_exists('workreapSaveProjectData')) {
             $min_price          = !empty($data['min_price']) ? sanitize_text_field($data['min_price']) : "";
             $max_price          = !empty($data['max_price']) ? sanitize_text_field($data['max_price']) : "";
 
-            $categories         = !empty($data['categories']) ? intval($data['categories']) : "";
+            $categories         = !empty($data['categories']) ? $data['categories'] : "";
             $duration           = !empty($data['duration']) ? intval($data['duration']) : "";
             $zipcode            = !empty($data['zipcode']) ? sanitize_text_field($data['zipcode']) : "";
             $country            = !empty($data['country']) ? sanitize_text_field($data['country']) : "";
