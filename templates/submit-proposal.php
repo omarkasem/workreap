@@ -48,7 +48,9 @@ if( !empty($allow_project) ){
 	$fixed_image	= workreap_add_http_protcol(WORKREAP_DIRECTORY_URI . 'public/images/fixed.png');
 	$is_milestone	= !empty($project_meta['is_milestone']) ? $project_meta['is_milestone'] : '';
 	$proposal_price	= isset($proposal_price) && $proposal_price > 0 ? $proposal_price : "";	
-	
+	$min_project_price = (int) get_post_meta($project_id, 'max_price', true) ?? '';
+
+	$real_project_price =  apply_filters('workreap_filter_get_project_price', $project_id);
 	$checked_fixed_type		= "";
 	$checked_milestone_type	= "";
 	$checked_fixed_class	= "";
@@ -109,7 +111,7 @@ $ai_classs      = !empty($enable_ai) ? 'wr-input-ai' : '';
 										<div class="form-group wr-input-price">
 											<label class="wr-label"><?php esc_html_e('Your budget working rate','workreap');?></label>
 											<div class="wr-placeholderholder">
-												<input type="text" value="<?php echo esc_attr($proposal_price);?>" name="price" data-post_id="<?php echo intval($project_id);?>" class="form-control wr_proposal_price wr-themeinput" placeholder="<?php esc_attr_e('Enter your budget working rate','workreap');?>">
+												<input type="text" value="<?php echo  !empty($proposal_price) ? esc_attr($proposal_price) : esc_attr($min_project_price);?>" name="price" data-post_id="<?php echo intval($project_id);?>" class="form-control wr_proposal_price wr-themeinput" placeholder="<?php esc_attr_e('Enter your budget working rate','workreap');?>">
 											</div>
 										</div>
 										<div class="form-group">

@@ -47,9 +47,10 @@ $selected_freelancers   = !empty($selected_freelancers) ? intval($selected_freel
                         <div class="wr-themeform__wrap">
                             <div class="form-group form-group-half">
                                 <label class="wr-label"><?php esc_html_e('No. of freelancers','workreap');?></label>
-                                <div class="wr-select">
-                                    <?php do_action( 'workreap_custom_dropdown_html', $list_freelancers,'no_of_freelancers','wr-num-freelancer',$selected_freelancers );?>
-                                </div>
+                                <!-- <div class="wr-select">
+                                    <?php //do_action( 'workreap_custom_dropdown_html', $list_freelancers,'no_of_freelancers','wr-num-freelancer',$selected_freelancers );?>
+                                </div> -->
+                                <input class="form-control" min="1" max="100" step="1"  autocomplete="off" placeholder="<?php esc_attr_e('Enter number of Fitters', 'workreap');?>" type="number" name="no_of_freelancers" value="<?php echo $selected_freelancers;?>">
                             </div>
                             <div class="form-group form-group-half">
                                 <label class="wr-label"><?php esc_html_e('Expertise level','workreap');?></label>
