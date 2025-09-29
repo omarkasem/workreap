@@ -46,6 +46,8 @@ $from_billing_address = !empty($identity) ? workreap_user_billing_address($ident
 $order_meta           = get_post_meta($order_id, 'cus_woo_product_data', true);
 $order_meta           = !empty($order_meta) ? $order_meta : array();
 
+$order_meta['price'] = apply_filters('workreap_filter_get_freelancer_price', $order_meta['price']);
+
 $payment_type   = get_post_meta($order_id, 'payment_type', true);
 $payment_type   = !empty($payment_type) ? $payment_type : '';
 
@@ -248,7 +250,7 @@ $billing_address    = !empty($invoice_billing_to) && !empty($workreap_settings['
                                                 echo esc_html($project_title);
                                             ?>
                                         </td>
-                                        <td data-label="<?php esc_attr_e('Cost', 'workreap');?>"><?php workreap_price_format($order_meta['price']);?></td>
+                                        <td ggg data-label="<?php esc_attr_e('Cost', 'workreap');?>"><?php workreap_price_format($order_meta['price']);?></td>
                                         <td data-label="<?php esc_attr_e('Amount', 'workreap');?>"><?php workreap_price_format($order_meta['price']);?></td>
                                     </tr>
                                 <?php } else {
@@ -259,12 +261,7 @@ $billing_address    = !empty($invoice_billing_to) && !empty($workreap_settings['
                         <div class="wr-subtotal">
                             <ul class="wr-subtotalbill">
                                 <li><?php esc_html_e('Subtotal', 'workreap'); ?> : <h6><?php workreap_price_format($get_subtotal); ?></h6> </li>
-                                <?php if (!empty($payment_type) && $payment_type === 'package' && !empty($processing_fee)) { ?>
-                                    <li><?php esc_html_e('Taxes & fees', 'workreap'); ?>:<h6><?php workreap_price_format($processing_fee); ?></h6>
-                                </li>
-                                <?php } else { ?>
-                                    <li><?php esc_html_e('Processing Fee', 'workreap'); ?>: <h6>-<?php workreap_price_format($processing_fee); ?></h6></li>
-                                <?php } ?>
+                       
                             </ul>
                             <div class="wr-sumtotal">
                                 <?php esc_html_e('Total', 'workreap'); ?> : <h6>

@@ -1223,6 +1223,7 @@ if( !function_exists('workreapAddMilestone') ){
         $milestones     = !empty($data['milestone']) ? array_merge($old_milestone,$data['milestone']) : array();
         $milestone_price= 0;
         $proposal_price = isset($proposal_meta['price'])? $proposal_meta['price'] : 0;
+        $proposal_price = apply_filters('workreap_filter_get_proposal_price', $proposal_price);
         if( empty($milestones) ){
             $json['type']           = 'error';
 	        $json['message'] 		= esc_html__('Oops!', 'workreap');
@@ -2050,6 +2051,7 @@ if (!function_exists('workreap_proposal_order_budget_details')) {
         if($user_type === 'freelancers'){
             $order_price = !empty($proposal_meta['price']) ? $proposal_meta['price'] : 0;
         }
+        $order_price = apply_filters('workreap_filter_get_proposal_price', $order_price);
 
 		ob_start();?>
 			<div class="wr-asideholder wr-taskdeadline">

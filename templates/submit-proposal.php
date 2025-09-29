@@ -38,6 +38,7 @@ if( !empty($allow_project) ){
 	}
 	
 	$proposal_price	= isset($proposal_meta['price']) ? $proposal_meta['price'] : 0;
+	$proposal_price = apply_filters('workreap_filter_get_proposal_price', $proposal_price);
 	$product		= wc_get_product( $project_id );
 	$project_meta	= get_post_meta( $project_id, 'wr_project_meta',true);
 	$project_type	= !empty($project_meta['project_type']) ? $project_meta['project_type'] : '';
@@ -49,6 +50,11 @@ if( !empty($allow_project) ){
 	$is_milestone	= !empty($project_meta['is_milestone']) ? $project_meta['is_milestone'] : '';
 	$proposal_price	= isset($proposal_price) && $proposal_price > 0 ? $proposal_price : "";	
 	$min_project_price = (int) get_post_meta($project_id, 'max_price', true) ?? '';
+
+	if($min_project_price > 0){
+		$admin_commision		= !empty($workreap_settings['admin_commision']) ? $workreap_settings['admin_commision'] : 0;
+        $min_project_price   = ceil(($min_project_price / (100 + $admin_commision)) * 100);
+	}
 
 	$real_project_price =  apply_filters('workreap_filter_get_project_price', $project_id);
 	$checked_fixed_type		= "";
@@ -111,7 +117,7 @@ $ai_classs      = !empty($enable_ai) ? 'wr-input-ai' : '';
 										<div class="form-group wr-input-price">
 											<label class="wr-label"><?php esc_html_e('Your budget working rate','workreap');?></label>
 											<div class="wr-placeholderholder">
-												<input type="text" value="<?php echo  !empty($proposal_price) ? esc_attr($proposal_price) : esc_attr($min_project_price);?>" name="price" data-post_id="<?php echo intval($project_id);?>" class="form-control wr_proposal_price wr-themeinput" placeholder="<?php esc_attr_e('Enter your budget working rate','workreap');?>">
+												<input type="text" value="<?php echo  !empty($proposal_price) ? esc_attr($proposal_price) : esc_attr($min_project_price);?>" name="price" data-post_id="<?php echo intval($project_id);?>" class="form-control wr_proposal_price2 wr-themeinput" placeholder="<?php esc_attr_e('Enter your budget working rate','workreap');?>">
 											</div>
 										</div>
 										<div class="form-group">
@@ -336,6 +342,18 @@ $scripts = " jQuery(document).ready(function () {
 			animation: 350,
 		});
 	} 
+
+	// Set initial value on page load
+	let initial_price = jQuery('.wr_proposal_price2').val();
+	jQuery('#wr_user_share').html('£' + parseFloat(initial_price).toFixed(2));
+
+	// Update when value changes
+	jQuery('.wr_proposal_price2').on('input', function() {
+		let price = jQuery(this).val();
+		jQuery('#wr_user_share').html('£' + parseFloat(price).toFixed(2)); 
+	});
+
+	
 });";
 wp_add_inline_script('workreap', $scripts, 'before');
 get_footer();

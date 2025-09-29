@@ -9,6 +9,7 @@ $profile_id     = workreap_get_linked_profile_id($freelancer_id, '','freelancers
 $user_name      = workreap_get_username($profile_id);
 $avatar         = apply_filters( 'workreap_avatar_fallback', workreap_get_user_avatar(array('width' => 50, 'height' => 50), $profile_id), array('width' => 50, 'height' => 50));
 $proposal_price = isset($args['proposal_meta']['price']) ? $args['proposal_meta']['price'] : 0;
+$proposal_price = apply_filters('workreap_filter_get_proposal_price', $proposal_price);
 $args   = array(
     'post_id'       => $proposal_id,
     'orderby'       => 'date',

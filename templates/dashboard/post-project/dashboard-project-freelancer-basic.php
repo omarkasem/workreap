@@ -18,6 +18,8 @@ $user_name      = workreap_get_username($profile_id);
 $avatar         = apply_filters( 'workreap_avatar_fallback', workreap_get_user_avatar(array('width' => 50, 'height' => 50), $profile_id), array('width' => 50, 'height' => 50));
 $proposal_price = isset($args['proposal_meta']['price']) ? $args['proposal_meta']['price'] : 0;
 do_action('workreap_project_completed_form',$args);
+
+$proposal_price = apply_filters('workreap_filter_get_proposal_price', $proposal_price);
 ?>
 <div class="wr-projectsstatus_head">
     <div class="wr-projectsstatus_info">

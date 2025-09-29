@@ -123,6 +123,7 @@ $time_format    = get_option( 'time_format' );
                             $proposal_type      = get_post_meta( $post->ID, 'proposal_type',true );
                             $proposal_type      = !empty($proposal_type) ? $proposal_type : '';
                             $price              = isset($proposal_meta['price']) ? $proposal_meta['price'] : 0;
+                            $price = apply_filters('workreap_filter_get_proposal_price', $price);
                             $product_author_id  = get_post_field ('post_author', $post->ID);
                             $linked_profile_id  = workreap_get_linked_profile_id($product_author_id, '','freelancers');
                             $user_name          = workreap_get_username($linked_profile_id);

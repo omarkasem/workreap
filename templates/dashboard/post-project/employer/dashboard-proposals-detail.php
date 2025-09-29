@@ -76,7 +76,7 @@ if(!empty($is_offline_enabled)){
     $offline_order          = !empty($offline_orders) && is_array($offline_orders) ? count($offline_orders) : false;
 }
 
-
+$proposal_meta['price'] = apply_filters('workreap_filter_get_proposal_price', $proposal_meta['price']);
 ?>
 <div class="wr-project-wrapper">
     <div class="wr-project-box wr-employerproject">

@@ -856,6 +856,30 @@ if (!function_exists('workreap_get_username')) {
     add_filter('workreap_get_username', 'workreap_get_username', 10, 1);
 }
 
+
+add_filter('workreap_filter_get_fixed_project_price', 'workreap_filter_get_fixed_project_price', 99, 1);
+function workreap_filter_get_fixed_project_price($price){
+    $user_id = get_current_user_id();
+    $user_type = workreap_get_user_type($user_id);
+
+    if($user_type == 'freelancers'  ){
+        $currency   = workreap_get_current_currency();
+        $price = (int) str_replace(array($currency['symbol'], '.00'), '', $price);
+
+        global $workreap_settings;
+
+        $admin_commision = !empty($workreap_settings['admin_commision']) ? intval($workreap_settings['admin_commision']) : 0;
+        $price           = floatval($price);
+        
+        // Correct calculation: fitter's base amount
+        $fitter_amount   = ($price / (100 + $admin_commision)) * 100;
+        $price = $currency['symbol'] . ceil(number_format($fitter_amount, 2));
+    }
+
+    
+    return $price;
+}
+
 /**
  * price format
  *

@@ -930,12 +930,24 @@ if ( ! function_exists( 'workreap_acf_groups' ) ) {
 if ( !function_exists( 'workreap_commission_fee' ) ) {
 	function workreap_commission_fee( $proposed_price='',$post_id='' ) {
 		global $workreap_settings;
+
+		$user_id = get_current_user_id();
+		$user_type = workreap_get_user_type($user_id);
+
 		$percentage		= !empty($workreap_settings['admin_commision']) ? $workreap_settings['admin_commision'] : 0;
-		$admin_shares 	= $proposed_price/100 * $percentage;
-		$freelancer_shares 	= $proposed_price - $admin_shares;
+		$proposed_price = floatval($proposed_price);
+
+		$freelancer_shares = ($proposed_price / (100 + $percentage)) * 100;
+		$admin_shares      = $proposed_price - $freelancer_shares;
+		
 
 		$settings['admin_shares'] 	= !empty($admin_shares) && $admin_shares > 0 ? number_format($admin_shares,2,'.', '') : 0.0;
 		$settings['freelancer_shares'] 	= !empty($freelancer_shares) && $freelancer_shares > 0 ? number_format($freelancer_shares,2,'.', '') : 0.0;
+
+
+		if($user_type == 'freelancers'){
+			$settings['freelancer_shares'] 	= $proposed_price;
+		}
 
 		return $settings;
 	}

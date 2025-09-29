@@ -616,6 +616,8 @@ if (!function_exists('workreapProjectHiring')) {
                     $price  = isset($proposal_meta['price']) ? $proposal_meta['price'] : 0;
                 }
 
+                $price = apply_filters('workreap_filter_get_proposal_price', $price);
+
                 if (class_exists('WooCommerce')) {
                     global $woocommerce;
 
