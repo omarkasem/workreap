@@ -3809,15 +3809,26 @@ if( !function_exists(  'workreap_view_identity_detail' ) ) {
 			'name'   				=> esc_html__('Name', 'workreap'),
 			'contact_number'  		=> esc_html__('Contact number', 'workreap'),
 			'verification_number'   => esc_html__('Verification number', 'workreap'),
-			'address'   			=> esc_html__('Address', 'workreap'),
+			'address'   			=> esc_html__('Business Address', 'workreap'),
 		);
 
 		if( !empty($verification['info'] ) ) {
 			unset( $verification['info'] );
 		}
 
-        $linked_profile = get_user_meta($user_id, '_linked_profile', true);
+        $user_type = workreap_get_user_type($user_id);
+        if($user_type === 'freelancers') {
+            $linked_profile = get_user_meta($user_id, '_linked_profile', true);
+        }else{
+            $linked_profile = get_user_meta($user_id, '_linked_profile_employer', true);
+        }
+
         $insurance_certificate = get_post_meta($linked_profile, 'insurance_certificate', true);
+        $personal_address = get_post_meta($linked_profile, 'personal_address', true);
+        if(!empty($personal_address)){
+            $user_info['personal_address'] = $personal_address;
+            $required['personal_address'] = esc_html__('Home Address', 'workreap');
+        }
 
 		ob_start();
 		?>

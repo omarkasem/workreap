@@ -159,6 +159,8 @@ $upload_file_size	= !empty($workreap_settings['upload_file_size']) ? $workreap_s
 							</div>
 						<?php } ?>
 
+						<?php do_action('workreap_employer_setting_extra_fields', $profile_id); ?>
+
 					</div>
 				</div>
 				<div class="wr-profileform__holder">

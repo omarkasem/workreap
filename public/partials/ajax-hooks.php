@@ -824,6 +824,8 @@ if (!function_exists('workreap_save_employer_settings')) {
         if( !empty($enable_state) ){
             update_post_meta( $profile_id, 'state', $state );
         }
+
+        do_action('workreap_update_employer_fields', $profile_id, $profile_data);
         $json['type']           = 'success';
 	    $json['message'] 		= esc_html__('Woohoo!', 'workreap');
         $json['message_desc']   = esc_html__('Your profile has been updated', 'workreap');
