@@ -1408,7 +1408,7 @@ if( !function_exists('workreapSubmitProposal') ){
             $is_milestone	= !empty($project_meta['is_milestone']) ? $project_meta['is_milestone'] : '';
             $required_fields    = array(
                 'price'             => esc_html__( 'Proposal price is required', 'workreap' ),
-                'description'       => esc_html__( 'Proposal description is required', 'workreap' ),
+                // 'description'       => esc_html__( 'Proposal description is required', 'workreap' ),
             );
             $offline_order          = false;
             $is_offline_enabled     = apply_filters('workreap_check_offline_payment_methods_enabled', false);
