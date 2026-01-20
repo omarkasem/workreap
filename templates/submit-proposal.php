@@ -54,14 +54,18 @@ if( !empty($allow_project) ){
 	if($min_project_price > 0){
 		$admin_commision		= !empty($workreap_settings['admin_commision']) ? $workreap_settings['admin_commision'] : 0;
         $min_project_price   = ($min_project_price / (100 + $admin_commision)) * 100;
+		$min_project_price = number_format($min_project_price, 2, '.', '');
+		// if ($min_project_price >= 50) {
+		// 	$min_project_price = ceil($min_project_price);
+		// } else {
+		// 	$rounded = ceil($min_project_price * 10) / 10;
+		// 	$min_project_price = number_format($rounded, 2, '.', '');
+		// }
 
-		if ($min_project_price >= 50) {
-			$min_project_price = ceil($min_project_price);
-		} else {
-			$rounded = ceil($min_project_price * 10) / 10;
-			$min_project_price = number_format($rounded, 2, '.', '');
-		}
+	}
 
+	if($proposal_price > 0){
+		$proposal_price = number_format($proposal_price, 2, '.', '');
 	}
 
 	$real_project_price =  apply_filters('workreap_filter_get_project_price', $project_id);
