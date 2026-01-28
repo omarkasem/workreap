@@ -100,14 +100,14 @@ class Workreap_Admin_CPT_Freelancer {
 			'exclude_from_search' 	=> true,
 			'hierarchical' 			=> false,
 			'menu_position' 		=> 10,
-			'rewrite' 				=> array('slug' => 'freelancer', 'with_front' => true),
+			'rewrite' 				=> array('slug' => 'fitter', 'with_front' => true),
 			'query_var' 			=> false,
 			'has_archive' 			=> false,
 			'menu_icon'				=> WORKREAP_DIRECTORY_URI.'/public/images/wp-icon-workreap.png',
 			'capabilities' 			=> array(
 										'create_posts' => false
 									),
-			'rest_base'             => 'freelancer',
+			'rest_base'             => 'fitter',
 			'rest_controller_class' => 'WP_REST_Posts_Controller',
 		);
 		register_post_type( apply_filters('workreap_profiles_post_type_name', 'freelancers'), $args );

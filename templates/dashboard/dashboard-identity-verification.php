@@ -74,16 +74,16 @@ $identity_verified		= !empty($identity_verified) ? $identity_verified : 0;
 											<rect width="100%" height="100%"/>
 										</svg>
 										<i class="wr-icon-upload"></i>
-										<em><?php
+										<span class="wr-upload-desc"><?php
 											$size_message = sprintf( esc_html__( 'Make sure your file size does not exceed %dMB.', 'workreap' ), $workreap_settings['upload_file_size'] );
                                             echo wp_sprintf( '%1$s <br/> %2$s', esc_html__( 'Please upload your identity document here.', 'workreap' ), $size_message ); ?>
-											<label for="file1">
-												<span id="workreap-verification-btn">
-													<input id="file1" type="file" name="file">
-													<?php esc_html_e('Click here to upload', 'workreap');?>
-												</span>
-											</label>
-										</em>
+										</span>
+										<label for="file1">
+											<span id="workreap-verification-btn">
+												<input id="file1" type="file" name="file">
+												<?php esc_html_e('Click here to upload', 'workreap');?>
+											</span>
+										</label>
 									</div>
 									<ul class="wr-uploadbar wr-bars workreap-fileprocessing" id="workreap-fileprocessing"></ul>
 								</div>

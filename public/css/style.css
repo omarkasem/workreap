@@ -8392,6 +8392,31 @@ form.submitting .wpcf7-spinner {
   position: relative;
   z-index: 1;
 }
+.wr-uploadbox > .wr-upload-desc {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-bottom: 0;
+  font-size: 0.8125rem;
+  line-height: 1.3846153846em;
+  padding-top: 11px;
+  color: #353648;
+}
+.wr-uploadbox > .wr-upload-desc + label {
+  margin: 0;
+  cursor: copy;
+  font-weight: 400;
+  color: #1f62ff;
+  display: inline-block;
+}
+.wr-uploadbox > .wr-upload-desc + label input {
+  display: none;
+}
+
+.wr-uploadbox .wr-upload-btn-wrap {
+  position: relative;
+  z-index: 1;
+}
 /** ====== Service Steps components ====== **/
 .wr-videolink {
   display: flex;
